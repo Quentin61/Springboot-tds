@@ -1,0 +1,16 @@
+{{> /base/header}}
+<div class="ui relaxed divided list">
+    <div class="item">
+        {{#items}}
+        <div class="content">
+            <a class="header">{{nom}}</a>
+            <div class="description">{{evaluation}}</div>
+            <a href="/items/inc/{{nom}}" class="ui button">+</a>
+            <a href="/items/dec/{{nom}}" class="ui button">-</a>
+            <a href="/items/del/{{nom}}" class="ui button">POUBELLLE</a>
+        </div>
+        {{/items}}
+    </div>
+</div>
+<a href="/items/new" class="ui button">+</a>
+{{> /base/footer}}
