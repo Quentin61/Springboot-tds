@@ -1,0 +1,45 @@
+{{ >base/header }}
+<div class="ui raised very padded text container segment">
+    <h1 class="ui header"><i class="envelope icon"></i>Messagerie</h1>
+    <a class="ui button" href="/orgas/new">
+        <i class="plus icon"></i>Ajouter une organisation
+    </a><br><br>
+    <a class="ui button" href="../index">
+        <i class="close icon"></i>Fermer
+    </a>
+    <a class="ui button red" href="../remove/{{orga.id}}">
+        <i class="close icon"></i>Supprimer {{orga.name}}
+    </a>
+    <a class="ui button" href="../edit/{{orga.id}}">
+        <i class="edit icon"></i>Modifier {{orga.name}}
+    </a>
+    <table class="ui celled striped table">
+        <tbody>
+            <tr>
+                <td>Id</td>
+                <td>{{orga.id}}</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{orga.name}}</td>
+            </tr>
+            <tr>
+                <td>Domain</td>
+                <td>{{orga.domain}}</td>
+            </tr>
+            <tr>
+                <td>Aliases</td>
+                <td>{{orga.aliases}}</td>
+            </tr>
+            <tr>
+                <td>Groups</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Users</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{{ >base/footer }}

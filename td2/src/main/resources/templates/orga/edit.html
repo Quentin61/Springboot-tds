@@ -1,0 +1,22 @@
+{{ >base/header }}
+<div class="ui raised very padded text container segment">
+    <form class="ui form" action="/orgas/add">
+        <h3 class="ui block header">
+            <i class="icon calendar alternate"></i>models\organisation
+        </h3>
+        <div class="field">
+            <input type="text" name="nom" placeholder="Name" value="{{orga.name}}">
+        </div>
+        <div class="field">
+            <input type="text" name="domaine" placeholder="Domain"  value="{{orga.domain}}">
+        </div>
+        <div class="field">
+            <input type="text" name="aliases" placeholder="Aliases" value="{{orga.aliases}}">
+        </div>
+        <div>
+            <button class="positive ui button" type="submit" name="valider" value="1">Validate</button>
+            <a class="negative ui button" href="/orgas/index">Cancel</a>
+        </div>
+    </form>
+</div>
+{{ >base/footer }}
