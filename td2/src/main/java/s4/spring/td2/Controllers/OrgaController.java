@@ -77,7 +77,7 @@ public class OrgaController
     @PostMapping("/orgas/search")
     public String searchorga(ModelMap modelMap, @RequestParam String nom)
     {
-        List<Organization> all = this.orgaRepository.findByName(nom);
+        List<Organization> all = this.orgaRepository.findBy(nom);
         modelMap.put("all",all);
         return "orga/index";
     }

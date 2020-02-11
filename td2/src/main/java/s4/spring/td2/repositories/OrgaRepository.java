@@ -1,6 +1,7 @@
 package s4.spring.td2.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import s4.spring.td2.entities.Organization;
 
 import java.util.List;
@@ -11,7 +12,8 @@ public interface OrgaRepository extends JpaRepository<Organization, Integer>
     List<Organization> findByName(String name);
     List<Organization> findAll();
     Organization findById(int id);
-
+    @Query("SELECT o FROM Organization o where o.name like %?1% or o.domain like %?1% or o.aliases like %?1%")
+    List<Organization> findBy(String name);
     @Override
     void delete(Organization organization);
 }

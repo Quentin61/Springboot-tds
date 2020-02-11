@@ -4,7 +4,7 @@
     <a class="ui button" href="/orgas/new">
         <i class="plus icon"></i>Ajouter une organisation
     </a>
-    <table class="ui celled striped table">
+    <table class="ui selectable table">
         <thead>
         <tr>
             <td>Id</td>
@@ -36,11 +36,13 @@
         </tbody>
         {{/all}}
     </table>
-    <div class="ui icon input">
-        <form action="/orgas/search" method="post">
-            <i class="search icon"></i>
+    <form class="ui form" action="/orgas/search" method="post">
+        <div class="field">
+            <div class="ui right icon input">
             <input type="text" name="nom" placeholder="Search...">
-        </form>
-    </div>
+            <i class="search icon"></i>
+            </div>
+        </div>
+    </form>
 </div>
 {{ >base/footer }}
