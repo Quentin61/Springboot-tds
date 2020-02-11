@@ -1,9 +1,10 @@
 {{ >base/header }}
 <div class="ui raised very padded text container segment">
-    <form class="ui form" action="/orgas/add">
+    <form class="ui form" action="/orgas/alter">
         <h3 class="ui block header">
             <i class="icon calendar alternate"></i>models\organisation
         </h3>
+        <input type="hidden" value="{{orga.id}}" name="id">
         <div class="field">
             <input type="text" name="nom" placeholder="Name" value="{{orga.name}}">
         </div>

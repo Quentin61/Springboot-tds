@@ -37,8 +37,10 @@
         {{/all}}
     </table>
     <div class="ui icon input">
-        <i class="search icon"></i>
-        <input type="text" placeholder="Search...">
+        <form action="/orgas/search" method="post">
+            <i class="search icon"></i>
+            <input type="text" name="nom" placeholder="Search...">
+        </form>
     </div>
 </div>
 {{ >base/footer }}

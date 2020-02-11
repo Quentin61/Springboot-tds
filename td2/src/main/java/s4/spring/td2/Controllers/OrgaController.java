@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 import s4.spring.td2.entities.Organization;
@@ -41,14 +42,15 @@ public class OrgaController
         return new RedirectView("index");
     }
 
-    @GetMapping("/orgas/alter/{id}")
-    public RedirectView editOrga(@PathVariable("id")String id,@RequestParam String nom,@RequestParam String domaine,@RequestParam String aliases)
+    @GetMapping("/orgas/alter")
+    public RedirectView editOrga(@RequestParam int id,@RequestParam String nom,@RequestParam String domaine,@RequestParam String aliases)
     {
-        Organization organization = this.orgaRepository.findById(Integer.parseInt(id));
+        Organization organization = this.orgaRepository.findById(id);
         organization.setDomain(domaine);
         organization.setName(nom);
         organization.setAliases(aliases);
-        return new RedirectView("../index");
+        this.orgaRepository.save(organization);
+        return new RedirectView("/orgas/index");
     }
 
     @GetMapping("/orgas/edit/{id}")
@@ -72,10 +74,12 @@ public class OrgaController
         return new RedirectView("../index");
     }
 
-    @GetMapping("/orgas/search")
-    public RedirectView searchorga(ModelMap modelMap)
+    @PostMapping("/orgas/search")
+    public String searchorga(ModelMap modelMap, @RequestParam String nom)
     {
-        return new RedirectView("/orga");
+        List<Organization> all = this.orgaRepository.findByName(nom);
+        modelMap.put("all",all);
+        return "orga/index";
     }
 
 }
