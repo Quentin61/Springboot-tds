@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Organization
-{
+public class Organization {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String name;
@@ -17,12 +16,19 @@ public class Organization
 
     private String aliases;
 
-    @OneToMany (cascade=CascadeType.ALL,mappedBy="organization")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
     private List<Groupe> groupes;
 
-    @OneToMany (cascade=CascadeType.ALL,mappedBy="organization")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
     private List<User> users;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

@@ -1,7 +1,6 @@
 package s4.spring.td2.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

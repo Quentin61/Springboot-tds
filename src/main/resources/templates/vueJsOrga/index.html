@@ -1,0 +1,47 @@
+{{>base/header}}
+<div class="ui raised very padded text container segment">
+    <h1 class="ui header"><i class="envelope icon"></i>Messagerie</h1>
+    <a class="ui button" href="">
+        <i class="plus icon"></i>Ajouter une organisation
+    </a>
+    <table class="ui selectable table">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Domain</td>
+            <td>Aliases</td>
+            <td>Actions</td>
+            </th>
+        </tr></thead>
+        <tbody>
+        <tr>
+            <td><% props.item.name %></td>
+            <td><% props.item.domain %></td>
+            <td><% props.item.aliases %> </td>
+            <td></td>
+            <td>
+                <a class="circular ui icon button" href="">
+                    <i class="icon eye"></i>
+                </a>
+                <a class="circular ui icon edit button" href="">
+                    <i class="icon edit"></i>
+                </a>
+                <a class="circular ui button" @click="deleteItem(props.item)">
+                    <i class="icon close"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <form class="ui form" action="" method="post">
+        <div class="field">
+            <div class="ui right icon input">
+                <input type="text" name="nom" placeholder="Search...">
+                <i class="search icon"></i>
+            </div>
+        </div>
+    </form>
+</div>
+{{>base/footer}}
+{{{vue}}}

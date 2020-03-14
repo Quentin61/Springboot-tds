@@ -13,6 +13,8 @@ import s4.spring.td2.repositories.OrgaRepository;
 
 import java.util.List;
 
+import static org.apache.coyote.http11.Constants.a;
+
 @Controller
 public class OrgaController
 {
@@ -23,6 +25,10 @@ public class OrgaController
     {
         List<Organization> all = this.orgaRepository.findAll();
         model.put("all",all);
+        /*for (Organization a: all
+             ) {
+            this.orgaRepository.delete(a);
+        }*/
         return "orga/index";
     }
 
@@ -31,6 +37,7 @@ public class OrgaController
     {
         return "orga/new";
     }
+
     @GetMapping("/orgas/add")
     public RedirectView newOrga(@RequestParam String nom,@RequestParam String domaine,@RequestParam String aliases)
     {
