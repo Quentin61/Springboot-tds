@@ -60,4 +60,12 @@ public class User
     public void setIdentity(String identity) {
         this.identity = identity;
     }
+
+    public List<Script> getScripts() {
+        return scripts;
+    }
+
+    public void setScripts(List<Script> scripts) {
+        this.scripts = scripts;
+    }
 }

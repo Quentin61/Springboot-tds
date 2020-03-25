@@ -7,33 +7,38 @@ import org.springframework.web.servlet.view.RedirectView;
 import s4.spring.td5.entities.User;
 import s4.spring.td5.repositories.UserRepository;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
-@SessionAttributes("user")
 public class LogController
 {
-    @ModelAttribute("user")
-    public User getUser(User user){
-        return new User();
-    }
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/login")
+    @GetMapping("/index")
     public String log()
     {
-        return "log";
+        if(this.userRepository.findAll().size()==0)
+        {
+            User user = new User();
+            user.setLogin("admin");
+            user.setPassword("1234");
+            this.userRepository.save(user);
+        }
+        return "index";
     }
 
     @PostMapping("/log")
-    public RedirectView login(@RequestParam String login, @RequestParam String password)
+    public RedirectView login(@RequestParam String login, @RequestParam String password, HttpSession session)
     {
         User user = this.userRepository.findByLogin(login);
         if(user!=null)
         {
             if(user.getPassword().equals(password))
             {
-                //TODO ajouter la variable de session ici
-                return new RedirectView("/index");
+                session.setAttribute("user", user);
+                System.out.println(session.getAttribute("user"));
+                return new RedirectView("/scripts/index");
             }
             else
             {
@@ -46,19 +51,10 @@ public class LogController
         }
     }
 
-    @GetMapping("/index")
-    public String index(@ModelAttribute ("user") User user)
-    {
-        if(user.getLogin()!=null) //verifier si la varible de session n'est pas null
-        {
-            return "index";
-        }
-        return null;
-    }
     @GetMapping("logout")
-    public RedirectView logout()
+    public RedirectView logout(HttpSession session)
     {
-        //TODO retirer la variable de session ici
-        return new RedirectView("/login");
+        session.setAttribute("user", null);
+        return new RedirectView("/index");
     }
 }
