@@ -1,8 +1,8 @@
 {{>base/header}}
-<form class="ui form">
+<form class="ui form" action="/scripts/submit/{{id}}" method="post">
     <div class="field">
         <label>Title</label>
-        <input type="text" name="title"  value="{{script.title}}" placeholder="Title">
+        <input type="text" name="title" value="{{script.title}}" placeholder="Title">
     </div>
     <div class="field">
         <label>Description</label>
@@ -16,6 +16,22 @@
         <label>Creation date</label>
         <input type="date" name="creationDate" value="{{script.creationDate}}">
     </div>
-    <button class="ui button" type="submit">Edit</button>
+    <div class="field">
+        <label>Category</label>
+        <select class="ui fluid search dropdown" name="category">
+            {{#categories}}
+            <option value="{{name}}">{{name}}</option>
+            {{/categories}}
+        </select>
+    </div>
+    <div class="field">
+        <label>Language</label>
+        <select class="ui fluid search dropdown" name="language">
+            {{#languages}}
+            <option value="{{name}}">{{name}}</option>
+            {{/languages}}
+        </select>
+    </div>
+    <button class="ui button" type="submit">Add</button>
 </form>
 {{>base/footer}}

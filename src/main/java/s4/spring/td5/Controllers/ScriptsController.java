@@ -41,14 +41,21 @@ public class ScriptsController
         return "scripts/new";
     }
 
-    @PostMapping("/scripts/submit/")
-    public RedirectView add(/*@PathVariable(name = "id") String id,*/@RequestParam String title, @RequestParam String description, @RequestParam String content,@RequestParam String creationDate,HttpSession session,@RequestParam String language,@RequestParam String category)
+    @PostMapping(value = {"/scripts/submit", "/scripts/submit/{id}"})
+    public RedirectView add(@PathVariable(required = false) String id,@RequestParam String title, @RequestParam String description, @RequestParam String content,@RequestParam String creationDate,HttpSession session,@RequestParam String language,@RequestParam String category)
     {
-        /*Script script = this.scriptRepository.findById(Integer.parseInt(id));
+        Script script = this.scriptRepository.findById(Integer.parseInt(id));
         if(script==null)
-        {*/
-            Script script = new Script(title,description,content,creationDate);
-        /*}*/
+        {
+            script = new Script(title,description,content,creationDate);
+        }
+        else
+        {
+            script.setTitle(title);
+            script.setCreationDate(creationDate);
+            script.setContent(content);
+            script.setDescription(description);
+        }
         Language language1 = this.languageRepository.findByName(language);
         Category category1 = this.categoryRepository.findByName(category);
         User user = (User)session.getAttribute("user");
@@ -67,6 +74,10 @@ public class ScriptsController
     public String alter(ModelMap model, @PathVariable String id)
     {
         Script script = this.scriptRepository.findById(Integer.parseInt(id));
+        List<Language> lang = this.languageRepository.findAll();
+        List<Category> cat = this.categoryRepository.findAll();
+        model.put("languages", lang);
+        model.put("categories", cat);
         model.put("script",script);
         return "scripts/edit";
     }
