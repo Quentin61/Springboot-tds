@@ -14,4 +14,30 @@ public class Category {
     private List<Script>  scripts;
 
     private String name;
+
+    public Category()
+    {
+
+    }
+
+    public Category(String name)
+    {
+        this.name=name;
+    }
+
+    public List<Script> getScripts() {
+        return scripts;
+    }
+
+    public void setScripts(List<Script> scripts) {
+        this.scripts = scripts;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

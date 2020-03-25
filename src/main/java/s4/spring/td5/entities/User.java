@@ -21,6 +21,18 @@ public class User
 
     private String identity;
 
+    public User()
+    {
+
+    }
+    public User(String login, String password, String email, String identity)
+    {
+        this.login=login;
+        this.password=password;
+        this.email=email;
+        this.identity=identity;
+    }
+
     public int getId() {
         return id;
     }

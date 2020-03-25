@@ -16,6 +16,23 @@
         <label>Creation date</label>
         <input type="date" name="creationDate">
     </div>
+    <div class="field">
+        <label>Category</label>
+        <select class="ui fluid search dropdown" name="category">
+            {{#categories}}
+            <option value="{{name}}">{{name}}</option>
+            {{/categories}}
+        </select>
+    </div>
+    <div class="field">
+        <label>Language</label>
+        <select class="ui fluid search dropdown" name="language">
+            <option value="test">test</option>
+            {{#languages}}
+            <option value="{{name}}">{{name}}</option>
+            {{/languages}}
+        </select>
+    </div>
     <button class="ui button" type="submit">Add</button>
 </form>
 {{>base/footer}}

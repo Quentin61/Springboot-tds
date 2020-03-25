@@ -29,6 +29,19 @@ public class Script
     @ManyToOne
     private History history;
 
+    public Script()
+    {
+
+    }
+
+    public Script(String title, String description, String content, String creationDate)
+    {
+        this.title=title;
+        this.description=description;
+        this.content=content;
+        this.creationDate=creationDate;
+    }
+
     public int getId() {
         return id;
     }
@@ -67,5 +80,37 @@ public class Script
 
     public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public History getHistory() {
+        return history;
+    }
+
+    public void setHistory(History history) {
+        this.history = history;
     }
 }

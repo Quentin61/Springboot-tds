@@ -18,13 +18,7 @@ public class LogController
     @GetMapping("/index")
     public String log()
     {
-        if(this.userRepository.findAll().size()==0)
-        {
-            User user = new User();
-            user.setLogin("admin");
-            user.setPassword("1234");
-            this.userRepository.save(user);
-        }
+        init();
         return "index";
     }
 
@@ -42,12 +36,12 @@ public class LogController
             }
             else
             {
-                return new RedirectView("/login");
+                return new RedirectView("/index");
             }
         }
         else
         {
-            return new RedirectView("/login");
+            return new RedirectView("/index");
         }
     }
 
@@ -56,5 +50,14 @@ public class LogController
     {
         session.setAttribute("user", null);
         return new RedirectView("/index");
+    }
+
+    public void init()
+    {
+        if(this.userRepository.findAll().size()==0)
+        {
+            User user = new User("admin","1234",null,null);
+            this.userRepository.save(user);
+        }
     }
 }

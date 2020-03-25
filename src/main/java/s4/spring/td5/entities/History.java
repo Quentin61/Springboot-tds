@@ -19,6 +19,18 @@ public class History {
 
     private String comment;
 
+    public History()
+    {
+
+    }
+
+    public History(String date, String content, String comment)
+    {
+        this.date=date;
+        this.content=content;
+        this.comment=comment;
+    }
+
     public int getId() {
         return id;
     }
@@ -32,7 +44,7 @@ public class History {
     }
 
     public void setDate(String date) {
-        date = date;
+        this.date = date;
     }
 
     public String getContent() {
