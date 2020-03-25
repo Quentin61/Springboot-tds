@@ -32,19 +32,26 @@ public class ScriptsController
     private HistoryRepository historyRepository;
 
     @GetMapping("scripts/new")
-    public String newScript(ModelMap model)
+    public String newScript(ModelMap model, HttpSession session)
     {
-        List<Language> lang = this.languageRepository.findAll();
-        List<Category> cat = this.categoryRepository.findAll();
-        model.put("languages", lang);
-        model.put("categories", cat);
-        return "scripts/new";
+        User user = (User)session.getAttribute("user");
+        if(user!=null) {
+            List<Language> lang = this.languageRepository.findAll();
+            List<Category> cat = this.categoryRepository.findAll();
+            model.put("languages", lang);
+            model.put("categories", cat);
+            return "scripts/new";
+        }
+        else
+        {
+            return "index";
+        }
     }
 
     @PostMapping(value = {"/scripts/submit", "/scripts/submit/{id}"})
     public RedirectView add(@PathVariable(required = false) String id,@RequestParam String title, @RequestParam String description, @RequestParam String content,@RequestParam String creationDate,HttpSession session,@RequestParam String language,@RequestParam String category)
     {
-        Script script = this.scriptRepository.findById(Integer.parseInt(id));
+        Script script = id!=null?this.scriptRepository.findById(Integer.parseInt(id)):null;
         if(script==null)
         {
             script = new Script(title,description,content,creationDate);
@@ -71,15 +78,22 @@ public class ScriptsController
     }
 
     @GetMapping("/scripts/{id}")
-    public String alter(ModelMap model, @PathVariable String id)
+    public String alter(ModelMap model, @PathVariable String id,HttpSession session)
     {
-        Script script = this.scriptRepository.findById(Integer.parseInt(id));
-        List<Language> lang = this.languageRepository.findAll();
-        List<Category> cat = this.categoryRepository.findAll();
-        model.put("languages", lang);
-        model.put("categories", cat);
-        model.put("script",script);
-        return "scripts/edit";
+        User user = (User)session.getAttribute("user");
+        if(user!=null) {
+            Script script = this.scriptRepository.findById(Integer.parseInt(id));
+            List<Language> lang = this.languageRepository.findAll();
+            List<Category> cat = this.categoryRepository.findAll();
+            model.put("languages", lang);
+            model.put("categories", cat);
+            model.put("script", script);
+            return "scripts/edit";
+        }
+        else
+        {
+            return "index";
+        }
     }
 
     @GetMapping("/scripts/index")
@@ -91,7 +105,7 @@ public class ScriptsController
         {
             List<Script> script = this.scriptRepository.findAll();
             user = this.userRepository.findById(user.getId());
-            model.put("scripts",user.getScripts());
+            model.put("user",user);
             return "scripts/index";
         }
         else

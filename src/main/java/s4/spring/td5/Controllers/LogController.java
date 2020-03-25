@@ -56,7 +56,7 @@ public class LogController
     {
         if(this.userRepository.findAll().size()==0)
         {
-            User user = new User("admin","1234",null,null);
+            User user = new User("admin","1234","admin@spring.com","Admin");
             this.userRepository.save(user);
         }
     }
