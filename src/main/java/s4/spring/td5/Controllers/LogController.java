@@ -7,7 +7,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import s4.spring.td5.entities.User;
 import s4.spring.td5.repositories.UserRepository;
 
+import javax.persistence.EntityResult;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class LogController
@@ -25,6 +27,7 @@ public class LogController
     @PostMapping("/log")
     public RedirectView login(@RequestParam String login, @RequestParam String password, HttpSession session)
     {
+        List<User> users = this.userRepository.findAll();
         User user = this.userRepository.findByLogin(login);
         if(user!=null)
         {
@@ -50,6 +53,27 @@ public class LogController
     {
         session.setAttribute("user", null);
         return new RedirectView("/index");
+    }
+
+    @GetMapping("newUser")
+    public  String newUser()
+    {
+        return "/signup";
+    }
+
+    @PostMapping("signup")
+    public RedirectView signup(@RequestParam String identity, @RequestParam String login, @RequestParam String email,@RequestParam String password)
+    {
+        if(identity.equals("") || login.equals("") ||email.equals("") || password.equals(""))
+        {
+            return new RedirectView("newUser");
+        }
+        else
+        {
+            User user = new User(login,password, email, identity);
+            this.userRepository.save(user);
+            return new RedirectView("index");
+        }
     }
 
     public void init()
