@@ -62,4 +62,12 @@ public class History {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public List<Script> getScripts() {
+        return scripts;
+    }
+
+    public void setScripts(List<Script> scripts) {
+        this.scripts = scripts;
+    }
 }

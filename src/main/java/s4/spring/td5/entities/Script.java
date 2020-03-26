@@ -26,7 +26,7 @@ public class Script
     @ManyToOne
     private User user;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private History history;
 
     public Script()

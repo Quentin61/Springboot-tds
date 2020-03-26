@@ -10,6 +10,7 @@ import s4.spring.td5.entities.*;
 import s4.spring.td5.repositories.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -74,6 +75,7 @@ public class ScriptsController
         script.setLanguage(language1);
         user.setScripts(scripts);
         this.userRepository.save(user);
+        setHistory(script);
         return new RedirectView("/scripts/index");
     }
 
@@ -135,6 +137,28 @@ public class ScriptsController
             this.categoryRepository.save(cat1);
             this.categoryRepository.save(cat2);
             this.categoryRepository.save(cat3);
+        }
+    }
+
+    public void setHistory(Script script)
+    {
+        if(script.getHistory()==null)
+        {
+            History history = new History(script.getCreationDate(),"","");
+            List<Script> scripts = new ArrayList<>();
+            scripts.add(script);
+            history.setScripts(scripts);
+            script.setHistory(history);
+            this.scriptRepository.save(script);
+            this.historyRepository.save(history);
+        }
+        else
+        {
+            History history = this.historyRepository.findById(script.getHistory().getId());
+            List<Script> scripts = history.getScripts();
+            scripts.add(script);
+            history.setScripts(scripts);
+            this.historyRepository.save(history);
         }
     }
 }
