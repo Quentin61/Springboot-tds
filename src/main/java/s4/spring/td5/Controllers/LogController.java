@@ -51,7 +51,7 @@ public class LogController
     @GetMapping("logout")
     public RedirectView logout(HttpSession session)
     {
-        session.setAttribute("user", null);
+        session.removeAttribute("user");
         return new RedirectView("/index");
     }
 

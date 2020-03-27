@@ -1,6 +1,8 @@
 package s4.spring.td5.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import java.util.List;
 
 @Entity
 public class Script
@@ -26,8 +28,8 @@ public class Script
     @ManyToOne
     private User user;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    private History history;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "scripts")
+    private List<History> history;
 
     public Script()
     {
@@ -106,11 +108,11 @@ public class Script
         this.user = user;
     }
 
-    public History getHistory() {
+    public List<History> getHistory() {
         return history;
     }
 
-    public void setHistory(History history) {
+    public void setHistory(List<History> history) {
         this.history = history;
     }
 }

@@ -50,7 +50,7 @@ public class ScriptsController
     }
 
     @PostMapping(value = {"/scripts/submit", "/scripts/submit/{id}"})
-    public RedirectView add(@PathVariable(required = false) String id,@RequestParam String title, @RequestParam String description, @RequestParam String content,@RequestParam String creationDate,HttpSession session,@RequestParam String language,@RequestParam String category)
+    public RedirectView add(@PathVariable(required = false) String id,@RequestParam String title, @RequestParam String description, @RequestParam String content,@RequestParam String creationDate,HttpSession session,@RequestParam String language,@RequestParam String category, @RequestParam String comment)
     {
         Script script = id!=null?this.scriptRepository.findById(Integer.parseInt(id)):null;
         if(script==null)
@@ -69,13 +69,14 @@ public class ScriptsController
         User user = (User)session.getAttribute("user");
         user = this.userRepository.findById(user.getId());
         List<Script> scripts = user.getScripts();
+        script = setHistory(script, comment, content);
         scripts.add(script);
         script.setUser(user);
         script.setCategory(category1);
         script.setLanguage(language1);
         user.setScripts(scripts);
         this.userRepository.save(user);
-        setHistory(script);
+        Script test = this.scriptRepository.findById(script.getId());
         return new RedirectView("/scripts/index");
     }
 
@@ -140,25 +141,24 @@ public class ScriptsController
         }
     }
 
-    public void setHistory(Script script)
+    public Script setHistory(Script script, String comment, String content)
     {
         if(script.getHistory()==null)
         {
-            History history = new History(script.getCreationDate(),"","");
-            List<Script> scripts = new ArrayList<>();
-            scripts.add(script);
-            history.setScripts(scripts);
-            script.setHistory(history);
-            this.scriptRepository.save(script);
-            this.historyRepository.save(history);
+            History history = new History(script.getCreationDate(),content,comment);
+            List<History> histories = new ArrayList<>();
+            histories.add(history);
+            script.setHistory(histories);
         }
         else
         {
-            History history = this.historyRepository.findById(script.getHistory().getId());
-            List<Script> scripts = history.getScripts();
-            scripts.add(script);
-            history.setScripts(scripts);
+            History history = new History(script.getCreationDate(),content,comment);
+            List<History> histories = script.getHistory();
+            histories.add(history);
+            script.setHistory(histories);
+            history.setScripts(script);
             this.historyRepository.save(history);
         }
+        return script;
     }
 }

@@ -10,8 +10,8 @@ public class History {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "history")
-    private List<Script> scripts;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    private Script scripts;
 
     private String date;
 
@@ -63,11 +63,11 @@ public class History {
         this.comment = comment;
     }
 
-    public List<Script> getScripts() {
+    public Script getScripts() {
         return scripts;
     }
 
-    public void setScripts(List<Script> scripts) {
+    public void setScripts(Script scripts) {
         this.scripts = scripts;
     }
 }
