@@ -1,5 +1,8 @@
 package s4.spring.td5.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import java.util.List;
@@ -108,6 +111,7 @@ public class Script
         this.user = user;
     }
 
+    @JsonIgnore
     public List<History> getHistory() {
         return history;
     }

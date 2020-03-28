@@ -1,5 +1,7 @@
 package s4.spring.td5.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -25,6 +27,7 @@ public class Category {
         this.name=name;
     }
 
+    @JsonIgnore
     public List<Script> getScripts() {
         return scripts;
     }

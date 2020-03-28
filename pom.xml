@@ -65,6 +65,20 @@
 			<artifactId>springboot-vuejs</artifactId>
 			<version>[1.0,)</version>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>org.ow2.asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>7.3.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
