@@ -3,6 +3,7 @@ package s4.spring.td5.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import s4.spring.td5.entities.User;
 import s4.spring.td5.repositories.UserRepository;
@@ -49,9 +50,10 @@ public class LogController
     }
 
     @GetMapping("logout")
-    public RedirectView logout(HttpSession session)
+    public RedirectView logout(HttpSession session, RedirectAttributes redirectAttributes)
     {
-        session.removeAttribute("user");
+        session.invalidate();
+        redirectAttributes.addFlashAttribute("message", "you were disconnected succesfully");
         return new RedirectView("/index");
     }
 

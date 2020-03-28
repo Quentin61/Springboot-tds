@@ -1,4 +1,9 @@
 {{>base/header}}
+{{#message}}
+    <div class="ui message green">
+        <p>{{message}}</p>
+    </div>
+{{/message}}
 <form class="ui form" action="/log" method="post">
     <div class="field">
         <label>Login</label>

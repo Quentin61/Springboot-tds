@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import s4.spring.td5.entities.*;
 import s4.spring.td5.repositories.*;
@@ -50,12 +51,13 @@ public class ScriptsController
     }
 
     @PostMapping(value = {"/scripts/submit", "/scripts/submit/{id}"})
-    public RedirectView add(@PathVariable(required = false) String id,@RequestParam String title, @RequestParam String description, @RequestParam String content,@RequestParam String creationDate,HttpSession session,@RequestParam String language,@RequestParam String category, @RequestParam String comment)
+    public RedirectView add(@PathVariable(required = false) String id, @RequestParam String title, @RequestParam String description, @RequestParam String content, @RequestParam String creationDate, HttpSession session, @RequestParam String language, @RequestParam String category, @RequestParam String comment, RedirectAttributes redirectAttributes)
     {
         Script script = id!=null?this.scriptRepository.findById(Integer.parseInt(id)):null;
         if(script==null)
         {
             script = new Script(title,description,content,creationDate);
+            redirectAttributes.addFlashAttribute("message", "Your new script was created");
         }
         else
         {
@@ -63,6 +65,7 @@ public class ScriptsController
             script.setCreationDate(creationDate);
             script.setContent(content);
             script.setDescription(description);
+            redirectAttributes.addFlashAttribute("message", "Your script was edited");
         }
         Language language1 = this.languageRepository.findByName(language);
         Category category1 = this.categoryRepository.findByName(category);
@@ -76,7 +79,6 @@ public class ScriptsController
         script.setLanguage(language1);
         user.setScripts(scripts);
         this.userRepository.save(user);
-        Script test = this.scriptRepository.findById(script.getId());
         return new RedirectView("/scripts/index");
     }
 
