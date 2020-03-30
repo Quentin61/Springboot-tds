@@ -31,6 +31,7 @@ public class ScriptController
     {
         String restUrl = "/rest/search";
         vueJS.addDataRaw("choices", "[{text:'Title', value:'title'}, {text:'Description', value:'description'},{text:'Content', value:'content'}]");
+        vueJS.addDataRaw("headers", "[{text:'Title', value:'title'},{text:'Description', value:'description'},{ text: 'Category', value: 'category'},{ text: 'Language', value: 'language'}]");
         vueJS.addMethod("searchBy","let self=this;"+Http.post(restUrl,(Object)"{'search': this.search, 'type': this.type}","self.scripts = response.data;"));
         vueJS.addData("scripts",(Object)"this.scripts");
         vueJS.addData("search");

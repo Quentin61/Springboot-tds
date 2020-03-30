@@ -8,6 +8,18 @@
                     <v-text-field v-model="search" placeholder="search ..."></v-text-field>
                 </v-col>
             </v-row>
-            <?scripts?>
+            <template>
+                <v-data-table
+                        :headers="headers"
+                        :items="scripts"
+                        class="elevation-1"
+                >
+                    <template v-slot:items="scripts">
+                        <td><?scripts.name?></td>
+                        <td class="text-xs-right"><?scripts.category.name?></td>
+                        <td class="text-xs-right"><?scripts.language.name?></td>
+                    </template>
+                </v-data-table>
+            </template>
 {{>baseV/footer}}
 {{{vue}}}
