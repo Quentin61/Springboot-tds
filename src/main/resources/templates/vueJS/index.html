@@ -1,0 +1,13 @@
+{{>baseV/header}}
+            <v-row align="center">
+                <v-col class="d-flex" cols="6">
+                    <v-select :items="choices" v-model="type" label="rechercher par ...">
+                    </v-select>
+                </v-col>
+                <v-col class="d-flex" cols="6">
+                    <v-text-field v-model="search" placeholder="search ..."></v-text-field>
+                </v-col>
+            </v-row>
+            <?scripts?>
+{{>baseV/footer}}
+{{{vue}}}

@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import s4.spring.td5.entities.*;
 import s4.spring.td5.repositories.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -53,6 +55,37 @@ public class ScriptRestController
     {
         this.scriptRepository.delete(script);
         return new RedirectView("/scripts/index");
+    }
+
+    @PostMapping("/rest/search")
+    public List<Script> search(@RequestBody SearchObject object)
+    {
+        List<Script> scripts = new ArrayList<>();
+        switch (object.getType())
+        {
+            case("title"):
+            {
+                scripts = this.scriptRepository.findByTitleSearch(object.getSearch());
+                break;
+            }
+            case("description"):
+            {
+                scripts = this.scriptRepository.findByDescriptionSearch(object.getSearch());
+                break;
+            }
+            case("content"):
+            {
+                scripts = this.scriptRepository.findByContentSearch(object.getSearch());
+                break;
+            }
+
+            default:
+            {
+                scripts = this.scriptRepository.findByAllSearch(object.getSearch());
+                break;
+            }
+        }
+        return scripts;
     }
 
 }
