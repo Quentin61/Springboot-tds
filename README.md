@@ -2,8 +2,6 @@
 
 # Description
 
-Ce projet a été créé à partir de la branche TD5, et concerne la création d'un controlleur REST avec un client SPA qui permet de chercher des scripts en fonction d'un champ texte et du type de champ (titre, description ...).
-
 # Installation 
 
 ```git clone <nom du repository>```
@@ -18,7 +16,7 @@ Ce projet a été créé à partir de la branche TD5, et concerne la création d
 
 # Lancement 
 
-- Aller sur votre navigateur à l'URL suivante : https://localhost:8080/script/search
+- Aller sur votre navigateur à l'URL suivante : https://localhost:8080
 
 # Documentations 
 
