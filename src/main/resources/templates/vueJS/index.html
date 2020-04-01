@@ -1,7 +1,7 @@
 {{>baseV/header}}
             <v-row align="center">
                 <v-col class="d-flex" cols="6">
-                    <v-select :items="choices" v-model="type" label="rechercher par ...">
+                    <v-select :items="choices" v-model="type" label="search in all fields">
                     </v-select>
                 </v-col>
                 <v-col class="d-flex" cols="6">
@@ -13,11 +13,6 @@
                         :headers="headers"
                         :items="scripts"
                         class="elevation-1">
-                    <template v-slot:items="scripts">
-                        <td><?scripts.name?></td>
-                        <td class="text-xs-right"><? scripts.category.name ?></td>
-                        <td class="text-xs-right"><? scripts.language.name ?></td>
-                    </template>
                 </v-data-table>
             </template>
 {{>baseV/footer}}
