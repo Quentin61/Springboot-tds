@@ -7,6 +7,16 @@
                 <v-col class="d-flex" cols="6">
                     <v-text-field v-model="search" placeholder="search ..."></v-text-field>
                 </v-col>
+                <template>
+                    <v-container fluid>
+                        <input type="checkbox" id="title" v-model="selected" value="title">
+                        <label for="title">Title</label><br>
+                        <input type="checkbox" id="language" v-model="selected" value="language.name">
+                        <label for="language">Language</label><br>
+                        <input type="checkbox" id="category"  v-model="selected" value="category.name">
+                        <label for="category">Category</label><br>
+                    </v-container>
+                </template>
             </v-row>
             <template>
                 <v-data-table

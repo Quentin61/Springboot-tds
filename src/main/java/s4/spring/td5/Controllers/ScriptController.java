@@ -28,13 +28,18 @@ public class ScriptController
     {
         String restUrl = "/rest/search";
         vueJS.addDataRaw("choices", "[{text:'Title', value:'title'}, {text:'Description', value:'description'},{text:'Content', value:'content'}]");
-        vueJS.addDataRaw("headers", "[{text:'Title', value:'title'},{text:'Description', value:'description'},{ text: 'Category', value: 'category.name'},{ text: 'Language', value: 'language.name'}]");
+        vueJS.addDataRaw("headers", "[{text:'Title', value:'title'},{ text: 'Category', value: 'category.name'},{ text: 'Language', value: 'language.name'}]");
         vueJS.addMethod("searchBy","let self=this;"+Http.post(restUrl,(Object)"{'search': this.search, 'type': this.type}","self.scripts = response.data;"));
+        vueJS.addMethod("display", "let self = this;self.headers=[]; for (let pas = 0; pas < self.selected.length; pas++) {" +
+                "self.headers[pas]={text: self.selected[pas].split(\".\")[0],value: self.selected[pas]};" +
+                "}");
         vueJS.addData("scripts",(Object)"scripts");
         vueJS.addData("search");
         vueJS.addData("type");
         vueJS.addData("scripts",this.scriptRepository.findAll());
         vueJS.addWatcher("search", "this.searchBy();");
+        vueJS.addWatcher("selected","this.display();");
+        vueJS.addDataRaw("selected","[]");
         return "vueJS/index";
     }
 }
