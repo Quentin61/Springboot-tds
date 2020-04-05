@@ -11,7 +11,7 @@
 	<groupId>s4.spring</groupId>
 	<artifactId>td5</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>td5</name>
 	<description>td5</description>
 
